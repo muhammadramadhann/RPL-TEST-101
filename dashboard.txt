@@ -1,2 +1,3 @@
 Selamat datang admin!
 Data absensi karyawan
+Data penjualan
