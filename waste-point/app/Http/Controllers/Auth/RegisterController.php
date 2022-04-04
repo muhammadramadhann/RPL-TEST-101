@@ -11,23 +11,28 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
-    public function index()
+    public function create()
     {
         return view('auth.register');
     }
 
     public function store(Request $request)
     {
-        $user = $request->validate([
+        $request->validate([
             'name' => ['required', 'min:3'],
-            'email' => ['required', 'unique:users', 'email:dns'],
-            'password' => ['required', 'min:5'],
-            'nomorhp' => ['required'],
-            'address' => ['required', 'min:5']
+            'email' => ['required', 'unique:users', 'email'],
+            'password' => 'required|min:5',
+            'no_hp' => 'required',
+            'address' => 'required'
         ]);
 
-        $user['password'] = Hash::make($user['password']);
-        $user = User::create($user);
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'no_hp' => $request->no_hp,
+            'address' => $request->address,
+        ]);
 
         Auth::login($user);
 

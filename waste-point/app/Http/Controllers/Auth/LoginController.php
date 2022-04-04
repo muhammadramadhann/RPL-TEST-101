@@ -6,30 +6,30 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
-    public function index()
+    public function create()
     {
         return view('auth.login');
     }
 
-    public function authenticate(Request $request)
+    public function store(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email:dns'],
-            'password' => ['required']
+        $user = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => 'required'
         ]);
-    
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            
-            if (Auth::user()->is_admin){
-                return redirect('/admin');
+
+        if (Auth::attempt($user)) {
+            if (!Auth::user()->is_admin) {
+                return redirect(RouteServiceProvider::HOME)->with('auth', 'Selamat Datang Kembali ' . Auth::user()->name . '!');
+            } else {
+                return redirect('admin');
             }
-            return redirect(RouteServiceProvider::HOME)->with('auth', 'Selamat Datang Kembali ' . Auth::user()->name . '!');
         }
 
-        return back()->with('login-error', 'Login Gagal! email atau password tidak ditemukan');
+        return back()->with('auth-failed','Login gagal! username atau password salah');
     }
 }

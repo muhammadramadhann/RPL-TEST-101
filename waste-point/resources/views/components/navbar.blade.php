@@ -1,7 +1,5 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-    <div class="container">
+    <div class="container align-items-center">
         <a class="navbar-brand" href="/">
             <img src="{{ asset('images/nav-logo.svg') }}" width="105">
         </a>
@@ -18,7 +16,7 @@
                         Penukaran
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Sampah</a></li>
+                        <li><a class="dropdown-item" href="/penukaran-sampah">Sampah</a></li>
                         <li><a class="dropdown-item" href="#">Produk Pemilahan Sampah</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Konversi Poin</a></li>
@@ -39,7 +37,10 @@
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    @auth
+                    @guest
+                        <a href="{{ route('register') }}" class="btn btn-register mt-lg-0 mt-3 d-lg-inline d-block rounded">Register</a>
+                        <a href="{{ route('login') }}" class="btn btn-login mt-lg-0 mt-2 ms-lg-1 ms-0 d-lg-inline d-block rounded">Login</a>
+                    @else
                         <li class="nav-item dropdown">
                             <a class="nav-link active btn-hover rounded dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="me-lg-2 me-0">{{ Auth::user()->name }}</span>
@@ -56,60 +57,59 @@
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 @if (!Auth::user()->is_admin)
                                     <li>
-                                        <a class="dropdown-item" href="">
-                                            <i class="bi bi-layout-text-sidebar-reverse me-2"></i>
+                                        <a class="dropdown-item" href="{{ Route('admin') }}">
+                                            <i class="fa fa-user pe-2" aria-hidden="true"></i>
                                             Dashboard
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="">
-                                            <i class="bi bi-gear me-2"></i>
+                                            <i class="fa fa-cog pe-2" aria-hidden="true"></i>
                                             Edit Profil
                                         </a>
                                     </li>
+                                @else
+                                    <li>
+                                        <a class="dropdown-item" href="{{ Route('admin') }}">
+                                            <i class="fa fa-user pe-2" aria-hidden="true"></i>
+                                            Dashboard
+                                        </a>
+                                    </li>
                                 @endif
-                                <li>
-                                    <a class="dropdown-item" href="/admin">
-                                        <i class="bi bi-layout-text-sidebar-reverse me-2"></i>
-                                        Dashboard
-                                    </a>
-                                </li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
-                                    <button class="dropdown-item text-danger" type="submit" data-bs-toggle="modal" data-bs-target="#logoutModal">
-                                        <i class="fa fa-sign-out me-2" aria-hidden="true"></i> 
-                                        Logout
+                                    <button class="dropdown-item text-danger" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <i class="fa fa-sign-out pe-2" aria-hidden="true"></i>
+                                        Logout 
                                     </button>
                                 </li>
                             </ul>
                         </li>
-                    @else
-                        <a href="{{ route('register') }}" class="btn btn-register mt-lg-0 mt-3 d-lg-inline d-block rounded">Register</a>
-                        <a href="{{ route('login') }}" class="btn btn-login mt-lg-0 mt-2 ms-lg-1 ms-0 d-lg-inline d-block rounded">Login</a>
-                    @endauth
+                    @endguest
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="logoutModalLabel">Konfirmasi Logout</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            Anda yakin ingin logout dari Waste Point?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                  <button type="submit" class="btn btn-danger">Logout</button>
-                </form>
-            </div>
+            <h5 class="modal-title fw-bold" id="exampleModalLabel">Konfirmasi Logout</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+            Anda yakin ingin logout?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            <form action="{{ Route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+        </div>
+    </div>
     </div>
 </div>

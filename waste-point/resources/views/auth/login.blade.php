@@ -5,9 +5,11 @@
 @section('content')
     <div class="card auth mx-auto p-3 rounded shadow-sm">
         <div class="card-body">
-            @if (session('login-error'))
-                <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
-                        {{ session('login-error') }}
+            @if (session('auth-failed'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <div class="container">
+                        {{ session('auth-failed') }}
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
@@ -17,7 +19,7 @@
                 @csrf
                 <div class="mb-3">
                     <label for="email" class="form-label fw-bolder">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email" autofocus value="{{ old('email') }}">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email" autofocus required value="{{ old('email') }}">
                     @error('email')
                         <div class="text-danger mt-2">
                             {{ $message }}
@@ -26,7 +28,7 @@
                 </div>
                 <div class="mb-2">
                     <label for="password" class="form-label fw-bolder">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password" value="{{ old('password') }}">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password" required {{ old('password') }}>
                     @error('password')
                         <div class="text-danger mt-2">
                             {{ $message }}

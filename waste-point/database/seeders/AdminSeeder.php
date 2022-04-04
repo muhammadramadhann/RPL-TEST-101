@@ -20,7 +20,7 @@ class AdminSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@wastepoint.com',
             'password' => Hash::make('adminbos'),
-            'nomorhp' => '',
+            'no_hp' => '',
             'address' => '',
             'is_admin' => true
         ]);

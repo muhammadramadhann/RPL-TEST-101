@@ -18,15 +18,16 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('waste_poins')->default(0);
+            $table->integer('waste_points')->default(0);
             $table->string('avatar')->nullable();
-            $table->string('nomorhp');
+            $table->string('no_hp');
             $table->string('address');
             $table->string('postal_code')->nullable();
             $table->boolean('is_admin')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

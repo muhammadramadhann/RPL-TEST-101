@@ -28,9 +28,9 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="nomorhp" class="form-label fw-bolder">Nomor HP</label>
-                    <input type="text" class="form-control" id="nomorhp" name="nomorhp" placeholder="Masukkan nomor hp" value="{{ old('nomorhp') }}">
-                    @error('nomorhp')
+                    <label for="no_hp" class="form-label fw-bolder">Nomor HP</label>
+                    <input type="text" class="form-control" id="no_hp" name="no_hp" placeholder="Masukkan nomor hp" value="{{ old('no_hp') }}">
+                    @error('no_hp')
                         <div class="text-danger mt-2">
                             {{ $message }}
                         </div>

@@ -16,7 +16,7 @@
             <div class="col-lg-6 col-12 mt-lg-3 mt-0">
                 <h1 class="fw-bold mb-md-3 mb-2">Jadi agen perubahan, <br><span class="text-green">tukar sampah dari rumah</span></h1>
                 <p class="mb-4">Dukung perbaikan tata kelola sampah nasional dengan berupaya <span class="d-xl-block d-inline"> mengurangi dan mendaur ulang sampah bersama Waste Point.</span></p>
-                <a href="" class="btn btn-green py-2 px-4 mb-lg-0 mb-5 rounded">
+                <a href="/penukaran-sampah" class="btn btn-green py-2 px-4 mb-lg-0 mb-5 rounded">
                     <span class="align-middle fw-bold">Tukar Sampah</span>
                     <span class="fa fa-arrow-right ms-2 align-middle" aria-hidden="true"></span>
                 </a>
@@ -114,7 +114,7 @@
                             <span class="fa fa-arrow-right ms-2 align-middle text-green" aria-hidden="true"></span>
                         </a>
                     </div>
-                  </div>
+                </div>
             </div>
             <div class="col-lg-3 col-md-6 col-12 mb-lg-0 mb-4">
                 <div class="card">

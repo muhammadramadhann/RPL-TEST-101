@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Penukaran\SampahController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,23 +19,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// free access
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/penukaran-sampah', [SampahController::class, 'index'])->name('penukaran-sampah');
+Route::post('/penukaran-sampah', [SampahController::class, 'store'])->name('penukaran-sampah');
 
-// only guest for access
+// must guest
 Route::middleware('guest')->group(function() {
-    //register & login
-    Route::get('register', [RegisterController::class, 'index'])->name('register');
-    Route::post('register', [RegisterController::class, 'store'])->name('register');
-    Route::get('login', [LoginController::class, 'index'])->name('login');
-    Route::post('login', [LoginController::class, 'authenticate'])->name('login');
+    // authentication
+    Route::get('register', [RegisterController::class, 'create'])->name('register');
+    Route::post('register', [RegisterController::class, 'store'])->name('register');    
+    Route::get('login', [LoginController::class, 'create'])->name('login');
+    Route::post('login', [LoginController::class, 'store'])->name('login');
 });
 
-// only users logged in
+// must signed in
 Route::middleware('auth')->group(function() {
-    // admin
-    Route::get('admin', [AdminDashboardController::class, 'index'])->middleware('auth');
-    
-    // logout
+    Route::get('admin', [AdminDashboardController::class, 'index'])->name('admin');
     Route::post('logout', LogoutController::class)->name('logout');
 });

@@ -23,7 +23,7 @@ class User extends Authenticatable
         'password',
         'waste_points',
         'avatar',
-        'nomorhp',
+        'no_hp',
         'address',
         'postal_code',
         'is_admin',
@@ -38,6 +38,11 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function waste()
+    {
+        return $this->hasMany(Waste::class);
+    }
 
     /**
      * The attributes that should be cast.
